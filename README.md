@@ -5,7 +5,7 @@ pip install -r requirements.txt
 uvicorn backend.main:app
 ```
 
-#Frontend
+# Frontend
 ```
 npm install
 npm run dev
