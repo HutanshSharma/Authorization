@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+.form-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 500px;
+}
+
+.form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transform: translateX(40px);
+  transition: all 0.5s ease;
+  pointer-events: none;
+}
+
+.form.active {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.login-form:not(.active),
+.signup-form:not(.active) {
+  transform: translateX(-40px);
+  z-index: 1;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+}
+}
+
+@keyframes shrink {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0;
+}
+}
+
+.animate-slideIn {
+animation: slideIn 0.5s ease-out forwards;
+}
+
+.animate-shrink {
+animation: shrink 5s linear forwards;
+}
+
+#croptype {
+  max-height: 200px;
+  overflow-y: auto;
+}
