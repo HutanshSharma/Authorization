@@ -1,4 +1,4 @@
-import { use, useState } from 'react';
+import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import RightPanel from './RightPanel';
 import handleResetPassword from './handleResetPassword';

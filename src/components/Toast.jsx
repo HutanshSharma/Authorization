@@ -1,6 +1,7 @@
 import {LaptopMinimalCheck, Ban, TicketX} from 'lucide-react'
+import { useEffect } from 'react';
 
-export default function Toast({message, type}){
+export default function Toast({id, message, type, removeToast}){
     const getIcon = (type) => {
         switch(type) {
         case 'success':
@@ -15,26 +16,32 @@ export default function Toast({message, type}){
     };
     
     const getProgressBarColor = (type) => {
-    switch(type) {
-        case 'success':
-            return ['bg-[rgba(34,197,94,0.7)]','bg-green-200'];
-        case 'error':
-            return ['bg-[rgba(239,68,68,0.7)]','bg-[rgba(254,202,202,0.7)]'];
-        case 'invalid':
-            return ['bg-[rgba(249,115,22,0.7)]','bg-[rgba(254,215,170,0.7)]'];
-        default:
-            return ['bg-[rgba(34,197,94,0.7)]','bg-green-300'];
-    }
-};
+        switch(type) {
+            case 'success':
+                return ['bg-[rgba(34,197,94,0.8)]','bg-green-200'];
+            case 'error':
+                return ['bg-[rgba(239,68,68,0.8)]','bg-[rgba(254,202,202,0.8)]'];
+            case 'invalid':
+                return ['bg-[rgba(249,115,22,0.8)]','bg-[rgba(254,215,170,0.8)]'];
+            default:
+                return ['bg-[rgba(34,197,94,0.8)]','bg-green-300'];
+        }
+    };
 
+    useEffect(()=>{
+        const timer = setTimeout(()=>{
+            removeToast(id)
+        },5000)
+        return ()=>clearTimeout(timer)
+    },[])
 
     const color = getProgressBarColor(type)
 
     return (
-        <div className={`w-96 h-20 ${color[1]} shadow-gray-700 rounded-md font-medium shadow-lg flex items-center fixed right-20 bottom-20 z-20 animate-slideIn`}>
+        <div className={`w-96 h-20 ${color[1]} font-medium shadow-lg rounded-md flex items-center relative animate-slideIn`}>
             {getIcon(type)}
             <span>{message}</span>
-            <div className={`absolute left-0 bottom-0 h-1 w-full ${color[0]} animate-shrink`}></div>
+            <div className={`absolute rounded-b-md left-0 bottom-0 h-1 w-full ${color[0]} animate-shrink`}></div>
         </div>
     )
 } 
